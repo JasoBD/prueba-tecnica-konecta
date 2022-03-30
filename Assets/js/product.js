@@ -79,14 +79,27 @@ $(document).ready(function () {
                     async: true,
                 })
                     .done(function ajaxDone(res){
+                        swal(message, "success");
                         console.log(res);
                         if(res.error !== undefined){
                             $("#msg_error").html(res.error).show();
                             return false;
                         }else {
+                            swal({
+                                title: message,
+                                icon: "success",
 
-                            swal(message, "success");
-                            window.location.href= "?Controller=Products&action=index";
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+
+                                        window.location.href= "?Controller=Products&action=index";
+
+                                    } else {
+
+                                    }
+                                });
+
                         }
                         if(res.redirect !== undefined){
                             window.location = res.redirect;

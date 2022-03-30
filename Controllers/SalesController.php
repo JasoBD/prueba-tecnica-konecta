@@ -23,7 +23,7 @@ class SalesController
     {
         $id = $_REQUEST['id'];
         $product = $this->model->getListId($id);
-        json_encode($product);
+        echo json_encode($product);
     }
 
     public function register()

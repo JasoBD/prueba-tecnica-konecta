@@ -26,7 +26,7 @@ class ProductsController
     {
         $id = $_REQUEST['id'];
         $product = $this->model->getList();
-        json_encode($product);
+        echo   json_encode($product);
 
     }
 
@@ -36,7 +36,7 @@ class ProductsController
     {
         $id = $_REQUEST['id'];
         $product = $this->model->getListId($id);
-        json_encode($product);
+       echo json_encode($product);
     }
 
     /** METODO DE CREAR
@@ -94,7 +94,7 @@ class ProductsController
 
                 header("Content-Type: application/json");
                 $array_devolver = [];
-                $product = new Sale();
+                $product = new Product();
                 $captcha = $_POST['g-recaptcha-response'];
 
                 $secret = '6Ldrm1waAAAAAKEiG-hg9_l5qIFn_-XXYpXJidWV';
