@@ -75,26 +75,29 @@ $(document).ready(function () {
                     url: "?Controller=Products&action=" + action,
                     data: $(form).serialize(),
                     type: 'POST',
-                    success: function (data) {
+                    dataType: 'json',
+                    async: true,
+                })
+                    .done(function ajaxDone(res){
+                        console.log(res);
+                        if(res.error !== undefined){
+                            $("#msg_error").html(res.error).show();
+                            return false;
+                        }else {
 
-                         $('#div-results').html(data);
-
-                        if ($('.modal-backdrop').is(':visible')) {
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
-                            $("#productModal").modal('hide');
-                        };
-                        //Success Message == 'Title', 'Message body', Last one leave as it is
-                        swal(message, "success");
-                        dataTables();
-
-                    },
-                    error: function (data) {
-
-                        //Error Message == 'Title', 'Message body', Last one leave as it is
-                        swal("Oops...", "Something went wrong :(", "error");
-                    }
-                });
+                            swal(message, "success");
+                            window.location.href= "?Controller=Products&action=index";
+                        }
+                        if(res.redirect !== undefined){
+                            window.location = res.redirect;
+                        }
+                    })
+                    .fail(function ajaxError(e){
+                        console.log(e);
+                    })
+                    .always(function ajaxSiempre(){
+                    })
+                return false;
             } catch (error) {
                 console.error(error);
 

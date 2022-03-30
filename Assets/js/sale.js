@@ -66,6 +66,8 @@ $(document).ready(function () {
                         }else {
 
                             swal(message, "success");
+                            window.location.href= "?Controller=Sales&action=index";
+
                         }
                         if(res.redirect !== undefined){
                             window.location = res.redirect;
@@ -89,11 +91,10 @@ $(document).ready(function () {
     $('body').on("click",".show-modal-sale",function () {
         idSale = $(this).attr('data-id');
         $("#saleModal").modal('show');
-        if (!idProduct) {
-            idProduct = null;
+
             $('#frmSale').trigger("reset");
             $("#btn-save-update").html("Guardar")
-        }
+
     });
 
 
